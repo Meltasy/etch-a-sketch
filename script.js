@@ -46,19 +46,19 @@
 // Pseudocode
 
 // The new grid should take up the same space as before
-// Create the grid using two loops, one each for rows and columns
+// Make color of squares change to randomly generated colors
 
-let container = document.querySelector("#container");
+const container = document.querySelector("#container");
 
 const btn = document.querySelector("#btn");
 
-btn.addEventListener("click", newGrid);
+btn.addEventListener("click", getNewGrid);
 
-function newGrid() {
+function getNewGrid() {
     let newNumber = prompt("How many rows do you want in your grid?");
     if (newNumber > 100) {
         alert("Please choose a number less than 100.");
-        newGrid();
+        getNewGrid();
     } else {
         removeGrid();
         createGrid(newNumber);
@@ -72,20 +72,21 @@ function removeGrid() {
 }
 
 function createGrid(number) {
-    for (let i = 0; i < number; i ++) {
+    for (let i = 0; i < number * number; i ++) {
         const content = document.createElement("div");
         content.classList.add("content");
         container.appendChild(content);
-        for (let i = 0; i < number; i++) {
-                const row = document.createElement("div");
-                row.classList.add("row");
-                row.style.width = `${(600 / number)}px`;
-                row.style.height = `${(600 / number)}px`;
-                content.appendChild(row);
-                row.addEventListener("mouseenter", () => {
-                    row.style.backgroundColor = "rgb(52, 55, 121)";
-                });
-            }
+        content.style.width = `${(600 / number)}px`;
+        content.style.height = `${(600 / number)}px`;
+        content.addEventListener("mouseenter", getRandomColor)
+        function getRandomColor() {
+            let randomNumber = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+            let randomColor = randomNumber.padStart(6, 0);
+            content.style.backgroundColor = `#${randomColor.toUpperCase()}`;
+        };
+        // row.addEventListener("mouseenter", () => {
+        //     row.style.backgroundColor = "rgb(52, 55, 121)";
+        // });
     }
 }
 

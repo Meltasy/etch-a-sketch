@@ -11,11 +11,15 @@ body {
 
 #container {
     display: flex;
+    flex-wrap: wrap;
+    height: 600px;
+    width: 600px;
+    outline: 1px solid black;
 }
 
 .content,
 .row {
-    outline: 1px solid lightgray;
+    outline: 1px solid rgba(174, 124, 58, 20%);
 }
 
 #btn {
@@ -24,5 +28,9 @@ body {
     color: white;
     padding: 10px;
     margin-bottom: 20px;
-    background-color: rgb(52, 55, 121);
+    margin-right: 20px;
+    margin-left: 20px;
+    border-color: black;
+    background-color: rgba(174, 58, 58);
+    /* background-color: rgb(52, 55, 121); */
 }
