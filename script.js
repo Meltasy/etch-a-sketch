@@ -10,19 +10,60 @@
 // The old grid should be removed before the new grid is created
 // The new grid should take up the same space as before
 
-let container = document.querySelector("#container");
+// let container = document.querySelector("#container");
 
-createGrid(256);
+// createGrid(256);
+
+// const btn = document.querySelector("#btn");
+
+// btn.addEventListener("click", () => {
+//     // container.removeChild(content);
+//     let newNumber = prompt("How many rows do you want in your grid?");
+//     if (newNumber > 100) prompt("Please choose a number less than 100.");
+//     removeGrid();
+//     createGrid(newNumber * newNumber);
+// });
+
+// function removeGrid() {
+//     while (container.firstElementChild) {
+//         container.removeChild(container.firstElementChild);
+//     }
+// }
+
+// function createGrid(number) {
+//     for (let i= 0; i < number; i++) {
+//         const content = document.createElement("div");
+//         content.classList.add("content"); 
+//         container.appendChild(content);
+//         content.addEventListener('mouseenter', () => {
+//             content.style.backgroundColor = "springgreen";
+//         });
+//     }
+// }
+
+// Etch-a-Sketch: a new grid of any size
+
+// Pseudocode
+
+// The new grid should take up the same space as before
+// Create the grid using two loops, one each for rows and columns
+
+let container = document.querySelector("#container");
 
 const btn = document.querySelector("#btn");
 
-btn.addEventListener("click", () => {
-    // container.removeChild(content);
+btn.addEventListener("click", newGrid);
+
+function newGrid() {
     let newNumber = prompt("How many rows do you want in your grid?");
-    if (newNumber > 100) prompt("Please choose a number less than 100.");
-    removeGrid();
-    createGrid(newNumber * newNumber);
-});
+    if (newNumber > 100) {
+        alert("Please choose a number less than 100.");
+        newGrid();
+    } else {
+        removeGrid();
+        createGrid(newNumber);
+    }
+}
 
 function removeGrid() {
     while (container.firstElementChild) {
@@ -31,12 +72,21 @@ function removeGrid() {
 }
 
 function createGrid(number) {
-    for (let i= 0; i < number; i++) {
+    for (let i = 0; i < number; i ++) {
         const content = document.createElement("div");
-        content.classList.add("content"); 
+        content.classList.add("content");
         container.appendChild(content);
-        content.addEventListener('mouseenter', () => {
-            content.style.backgroundColor = "springgreen";
-        });
+        for (let i = 0; i < number; i++) {
+                const row = document.createElement("div");
+                row.classList.add("row");
+                row.style.width = `${(600 / number)}px`;
+                row.style.height = `${(600 / number)}px`;
+                content.appendChild(row);
+                row.addEventListener("mouseenter", () => {
+                    row.style.backgroundColor = "rgb(52, 55, 121)";
+                });
+            }
     }
 }
+
+createGrid(16);
