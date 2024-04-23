@@ -22,7 +22,8 @@ body {
     outline: 1px solid rgba(174, 124, 58, 20%);
 }
 
-#btn {
+#btn,
+#colorBtn {
     font-size: 18px;
     font-weight: 700;
     color: white;
@@ -31,6 +32,5 @@ body {
     margin-right: 20px;
     margin-left: 20px;
     border-color: black;
-    background-color: rgba(174, 58, 58);
-    /* background-color: rgb(52, 55, 121); */
+    background-color: rgb(52, 55, 121);
 }

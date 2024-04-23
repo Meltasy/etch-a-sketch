@@ -48,11 +48,62 @@
 // The new grid should take up the same space as before
 // Make color of squares change to randomly generated colors
 
-const container = document.querySelector("#container");
+// const container = document.querySelector("#container");
 
+// const btn = document.querySelector("#btn");
+
+// btn.addEventListener("click", getNewGrid);
+
+// function getNewGrid() {
+//     let newNumber = prompt("How many rows do you want in your grid?");
+//     if (newNumber > 100) {
+//         alert("Please choose a number less than 100.");
+//         getNewGrid();
+//     } else {
+//         removeGrid();
+//         createGrid(newNumber);
+//     }
+// }
+
+// function removeGrid() {
+//     while (container.firstElementChild) {
+//         container.removeChild(container.firstElementChild);
+//     }
+// }
+
+// function createGrid(number) {
+//     for (let i = 0; i < number * number; i ++) {
+//         const content = document.createElement("div");
+//         content.classList.add("content");
+//         container.appendChild(content);
+//         content.style.width = `${(600 / number)}px`;
+//         content.style.height = `${(600 / number)}px`;
+//         content.addEventListener("mouseenter", getRandomColor)
+//         function getRandomColor() {
+//             let randomNumber = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+//             let randomColor = randomNumber.padStart(6, 0);
+//             content.style.backgroundColor = `#${randomColor.toUpperCase()}`;
+//         };
+//         // row.addEventListener("mouseenter", () => {
+//         //     row.style.backgroundColor = "rgb(52, 55, 121)";
+//         // });
+//     }
+// }
+
+// createGrid(16);
+
+// Pseudocode
+
+// Add a button to toggle between random colors and one color
+// Add a darkening effect to squares each time they are revisited
+
+const container = document.querySelector("#container");
 const btn = document.querySelector("#btn");
+const colorBtn = document.querySelector("#colorBtn");
+let oneColor = true;
 
 btn.addEventListener("click", getNewGrid);
+colorBtn.addEventListener("click", () => oneColor = !oneColor);
 
 function getNewGrid() {
     let newNumber = prompt("How many rows do you want in your grid?");
@@ -78,16 +129,26 @@ function createGrid(number) {
         container.appendChild(content);
         content.style.width = `${(600 / number)}px`;
         content.style.height = `${(600 / number)}px`;
-        content.addEventListener("mouseenter", getRandomColor)
-        function getRandomColor() {
-            let randomNumber = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-            let randomColor = randomNumber.padStart(6, 0);
-            content.style.backgroundColor = `#${randomColor.toUpperCase()}`;
-        };
-        // row.addEventListener("mouseenter", () => {
-        //     row.style.backgroundColor = "rgb(52, 55, 121)";
-        // });
+        content.addEventListener("mouseenter", () => {
+            if (oneColor === true) {
+                content.style.backgroundColor = "rgb(52, 55, 121)";
+            } else {
+                content.style.backgroundColor = getRandomColor();
+            }
+            let currentOpacity = content.style.opacity;
+            if (currentOpacity) {
+                content.style.opacity = Number(currentOpacity) + 0.1;
+            } else {
+                content.style.opacity = 0.1;
+            }
+        });
     }
 }
+
+function getRandomColor() {
+    let randomNumber = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+    let randomColor = randomNumber.padStart(6, 0);
+    return `#${randomColor.toUpperCase()}`;
+};
 
 createGrid(16);
